@@ -15,21 +15,9 @@ gmailBtn.addEventListener('click', () => {
     }
 });
 
-//маленький блок
-// const child = document.querySelector('.child_block');
-// const maxLeft = 449;
-// let start = 0;
 
-// const moveRight = () => {
-//     if (start < maxLeft) {
-//         start = start + 1; 
-//         child.style.left = `${start}px`;
 
-//         requestAnimationFrame(moveRight); 
-//     }
-// };
-// moveRight();
-
+;//маленький блок
 const childBlock = document.querySelector('.child_block');
 const parentBlock = document.querySelector('.parent_block');
 
@@ -99,4 +87,59 @@ btnReset.addEventListener('click', () => {
 });
 
 showSeconds();
+
+
+
+// рандомные персонажи
+const charactersList = document.querySelector('.characters-list');
+const defaultPhoto = "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg";
+
+const request = new XMLHttpRequest();
+request.open('GET', '../data/characters.json'); 
+request.setRequestHeader('Content-Type', 'application/json');
+request.send();
+request.onload = function() {
+    if (request.status === 200) {
+        const characters = JSON.parse(request.response);
+
+        characters.forEach(character => {
+            const card = document.createElement('div');
+            card.classList.add('character-card');
+
+            const photoDiv = document.createElement('div');
+            photoDiv.classList.add('character-photo');
+            const img = document.createElement('img');
+            img.src = character.person_photo || defaultPhoto;
+            img.alt = character.name;
+            photoDiv.appendChild(img);
+
+            const infoDiv = document.createElement('div');
+            infoDiv.classList.add('character-info');
+            infoDiv.innerHTML = `
+            <p>Name: ${character.name}</p>
+            <p>Age: ${character.age}</p>`;
+
+            card.appendChild(photoDiv);
+            card.appendChild(infoDiv);
+
+            charactersList.appendChild(card);
+
+        });
+    } else {
+        console.log('ошибка, что-то не так с characters.json:', request.status);
+    }
+};
+
+// анкета
+const requestBio = new XMLHttpRequest();
+requestBio.open('GET', '../data/bio.json');
+requestBio.setRequestHeader('Content-Type', 'application/json');
+requestBio.send();
+requestBio.onload = () => {
+    const response = JSON.parse(requestBio.response);
+    console.log(response);
+};
+
+
+
 

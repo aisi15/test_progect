@@ -62,3 +62,45 @@ tabButtonsParent.addEventListener('click', (event) => {
 });
 
 
+//курс валюты
+const somInput = document.querySelector('#som');
+const usdInput = document.querySelector('#usd');
+const eurInput = document.querySelector('#eur');
+
+const request = new XMLHttpRequest();
+request.open('GET', '../data/converter.json');
+request.send();
+
+request.onload = () => {
+    const response = JSON.parse(request.response);
+    const converter = (element) => {
+        element.oninput = () => {
+            if (element.value === '') {
+                somInput.value = '';
+                usdInput.value = '';
+                eurInput.value = '';
+                return;
+            }
+            const value = Number(element.value);
+
+            if (element.id === 'som') {
+                usdInput.value = (value / response.usd).toFixed(2);
+                eurInput.value = (value / response.eur).toFixed(2);
+            }
+            if (element.id === 'usd') {
+                const somValue = value * response.usd;
+                somInput.value = somValue.toFixed(2);
+                eurInput.value = (somValue / response.eur).toFixed(2);
+            }
+            if (element.id === 'eur') {
+                const somValue = value * response.eur;
+                somInput.value = somValue.toFixed(2);
+                usdInput.value = (somValue / response.usd).toFixed(2);
+            }
+        };
+    };
+    converter(somInput);
+    converter(usdInput);
+    converter(eurInput);
+};
+

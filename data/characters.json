@@ -1,17 +1,22 @@
 [
   {
-    "name": "",
-    "age": 0,
-    "photo": "url"
+    "name": "Хината",
+    "age": 30,
+    "person_photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKsqXJLm40LlmEs0XCcsx4W7pL-gUMQFKViQ&s"
   },
   {
-    "name": "",
-    "age": 0,
-    "photo": "url"
+    "name": "Кагеяма",
+    "age": 30,
+    "person_photo": "https://abrakadabra.fun/uploads/posts/2021-12/1639631220_1-abrakadabra-fun-p-kageyama-tobio-informatsiya-1.jpg"
   },
   {
-    "name": "",
-    "age": 0,
-    "photo": "url"
+    "name": "Нишиноя",
+    "age": 32,
+    "person_photo": "https://cdn.polyspeak.ai/speakmaster/fad0e1f5771223ffd0333cdcaad2eb7f.webp"
+  },
+  {
+    "name": "неизвестно",
+    "age": 27,
+    "person_photo": null
   }
 ]
